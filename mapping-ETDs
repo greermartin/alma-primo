@@ -1,0 +1,20 @@
+rule "Add Type to Theses"
+when
+"dc"."identifier" equals "luc_theses"
+then
+set "theses" in "discovery"."resourceType"
+end
+
+rule "Add Type to Dissertations"
+when
+"dc"."identifier" equals "luc_diss"
+then
+set "dissertations" in "discovery"."resourceType"
+end
+
+rule "Add Type to non theses and diss"
+when
+"dc"."identifier" not equals "luc_diss | luc_theses"
+then
+set "text_resources" in "discovery"."resourceType"
+end
