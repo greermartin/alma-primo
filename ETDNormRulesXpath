@@ -1,0 +1,20 @@
+rule "Add Type to Theses"
+when
+     exist "//*[local-name()='dc']/*[local-name()='identifier'][(contains(text(),'luc_theses'))]"
+then
+      set "thesis" in "dc"."type"
+end
+
+rule "Add Type to Dissertations"
+when
+     exist "//*[local-name()='dc']/*[local-name()='identifier'][(contains(text(),'luc_diss'))]"
+then
+     set "dissertations" in "discovery"."resourceType"
+end
+
+rule "Add Type to non Theses and Dissertations"
+when
+    not exist "//*[local-name()='dc']/*[local-name()='identifier'][(contains(text(),'luc_theses')) or (contains(text(),'luc_diss'))]"
+then
+    set "text_resources" in "discovery"."resourceType"
+end
